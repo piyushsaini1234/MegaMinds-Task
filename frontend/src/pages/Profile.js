@@ -46,24 +46,30 @@ const Profile = () => {
       const result = await fetchUserProfile();
       if (result.success && result.user?.createdAt) {
         const date = new Date(result.user.createdAt);
-        setMemberSince(date.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
-        }));
+        setMemberSince(
+          date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        );
       } else {
         // Fallback to current date if createdAt not available
         const date = new Date();
-        setMemberSince(date.toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
-        }));
+        setMemberSince(
+          date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        );
       }
       setLoading(false);
     };
+    // Call once on mount
     loadProfile();
-  }, [fetchUserProfile]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogoutClick = () => {
     setOpenLogoutDialog(true);
